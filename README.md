@@ -12,6 +12,17 @@ The implementation of the first part could reside almost completely in registers
 The second part required a rewrite that used stack.
 Some parts needed to be uesd twice, so they were either duplicated or jumped to with appropriate flags.
 
+## Day 2 - Pony
+
+This time the installation of Pony worked (I banned it years ago due to compilation issues).
+Pony has an intesting take on memory safety; the programmer needs to convince the compiler that the operations are safe.
+Its syntax is a bit verbose around generics.
+Its actor model seems capable (athough I did not use it).
+
+I wanted a language where it is easy to process more than a byte of input at a time, and I don't have many such left.
+Parsing the input took most of the effort.
+Getting the results then reused constructs that I alrady knew and so took only minutes.
+
 # Lists
 
 ## Language pool
@@ -121,6 +132,7 @@ Some parts needed to be uesd twice, so they were either duplicated or jumped to 
 - Perl
 - PHP(7)
 - PicoLisp
+- Pony
 - PostScript
 - Powershell
 - (SWI)Prolog
@@ -165,7 +177,6 @@ Some parts needed to be uesd twice, so they were either duplicated or jumped to 
 
 - Self - does not have 64bit distribution
 - XQuery - not powerful enough
-- Pony - ld: unrecognised emulation mode: cx16
 - Oberon - cannot compile standard library
 - Goby - Does not have documentation (404)
 - Smalltalk - Could start GUI but could not do anything; poor documentation maybe
@@ -231,3 +242,4 @@ Some parts needed to be uesd twice, so they were either duplicated or jumped to 
 - BCPL - almost no documentation; cannot find how to do input
 - CLU - cannot make run
 - Idris - version 2 is incomplete, version 1 does not run (missing library)
+- Mojo - not for Arch Linux
