@@ -23,6 +23,15 @@ I wanted a language where it is easy to process more than a byte of input at a t
 Parsing the input took most of the effort.
 Getting the results then reused constructs that I alrady knew and so took only minutes.
 
+## Day 3 - Hare
+
+Hmm, weird that I have not heard about Hare before; it is somewhat low-level language that hides the complexity similar to Go.
+It uses lots of modern features (expressions, type system, error handling) but lacks in memory management where ownership is not enforced.
+
+The task required looking at neighborhood on the grid, which was quite easy in the first part.
+The second part required some collection of gears and their subsequent processing.
+Luckily I avoided parsing the numbers twice.
+
 # Lists
 
 ## Language pool
@@ -33,6 +42,7 @@ Getting the results then reused constructs that I alrady knew and so took only m
 - CoffeeScript
 - Constraint Handling Rules
 - Csh
+- Eel - incomplete and outdated
 - Elm
 - F#
 - F*
@@ -102,6 +112,7 @@ Getting the results then reused constructs that I alrady knew and so took only m
 - Golo
 - Gosu
 - Groovy
+- Hare
 - Haskell
 - Haxe
 - Icon
@@ -200,7 +211,6 @@ Getting the results then reused constructs that I alrady knew and so took only m
 - Processing - just a Java "library"
 - Limbo - language for Inferno operating system
 - Nu - could not figure out input
-- Eel - incomplete and outdated
 - Sather - no doc how to work with strings
 - Ksh - too close to a regular Shell/Bash
 - Whiley - cannot handle input
@@ -243,3 +253,4 @@ Getting the results then reused constructs that I alrady knew and so took only m
 - CLU - cannot make run
 - Idris - version 2 is incomplete, version 1 does not run (missing library)
 - Mojo - not for Arch Linux
+- PascalABC.NET - fails to install
