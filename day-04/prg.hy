@@ -1,0 +1,20 @@
+(import sys)
+
+(setv points 0)
+(setv cards { })
+(for [line sys.stdin]
+	(setv card_rest (.partition (.strip line) ":"))
+	(setv card (int (get (.partition (get card_rest 0) " ") 2)))
+	(setv copies (+ 1 (.get cards card 0)))
+	(setv (get cards card) copies)
+	(setv head_tail (.partition (get card_rest 2) "|"))
+	(setv head (sfor x (.split (.strip (get head_tail 0))) x))
+	(setv tail (sfor x (.split (.strip (get head_tail 2))) x))
+	(setv common (len (.intersection head tail)))
+	(for [c (range (+ 1 card) (+ 1 card common))] 
+		(setv f (.get cards c 0))
+		(setv (get cards c) (+ f copies)))
+	(setv pts (if (> common 0) (** 2 (- common 1)) 0))
+	(setv points (+ points pts)))
+(print points)
+(print (sum (.values cards)))

@@ -32,10 +32,21 @@ The task required looking at neighborhood on the grid, which was quite easy in t
 The second part required some collection of gears and their subsequent processing.
 Luckily I avoided parsing the numbers twice.
 
+## Day 4 - Hy
+
+Coming home late, I wanted a simpler language.
+Hy is Python with Lisp syntax.
+It is verbose but still concise.
+
+The task itself was easy; the language has support for sets which makes the computation trivial.
+The hardest part was to not get lost in parentheses.
+
 # Lists
 
 ## Language pool
 
+- Arturo
+- ATS - cannot install
 - C#
 - CDuce
 - CLIPS
@@ -44,15 +55,16 @@ Luckily I avoided parsing the numbers twice.
 - Csh
 - Eel - incomplete and outdated
 - Elm
+- Emojicode
 - F#
 - F*
+- Falcon
 - Fetlang
 - Fish
 - Fleng
 - FlooP
 - Harbour
 - High Level Assembly
-- Hy
 - J
 - K
 - LogTalk
@@ -61,8 +73,10 @@ Luckily I avoided parsing the numbers twice.
 - o:XML
 - Occam
 - Oz
+- Pike
 - Pizza
 - rc
+- Samora
 - Swift (parallel scripting language)
 - TeX
 - TypeScript
@@ -115,6 +129,7 @@ Luckily I avoided parsing the numbers twice.
 - Hare
 - Haskell
 - Haxe
+- Hy
 - Icon
 - Io
 - Ivy (jhallen)
@@ -248,7 +263,6 @@ Luckily I avoided parsing the numbers twice.
 - Hamler - did not manage to build
 - ReasonML - not even tutorial can be build
 - ABC - cannot make work with termcap/curses
-- ATS - cannot install
 - BCPL - almost no documentation; cannot find how to do input
 - CLU - cannot make run
 - Idris - version 2 is incomplete, version 1 does not run (missing library)
