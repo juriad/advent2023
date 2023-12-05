@@ -41,6 +41,17 @@ It is verbose but still concise.
 The task itself was easy; the language has support for sets which makes the computation trivial.
 The hardest part was to not get lost in parentheses.
 
+## Day 5 - Pike
+
+After a few unsuccessful choices of languages, I settled for Pike.
+It is very readable, simplistic, with good documentation describing everything from the very beginning.
+But the documentation is not complete; some parts were hard to find such as how to parse string to int, or split a string.
+Fortunately the input and output was easy.
+
+The first implementation was keeping track of the history of each seed, I was hoping that it will be useful for the second part; it was not.
+I wanted to read the input only once, which meant that I needed to simulate both parts at the same time.
+Some errors were caused by interval artithmetics.
+
 # Lists
 
 ## Language pool
@@ -53,29 +64,21 @@ The hardest part was to not get lost in parentheses.
 - CoffeeScript
 - Constraint Handling Rules
 - Csh
-- Eel - incomplete and outdated
-- Elm
 - Emojicode
 - F#
 - F*
-- Falcon
 - Fetlang
 - Fish
 - Fleng
-- FlooP
-- Harbour
 - High Level Assembly
 - J
 - K
 - LogTalk
 - m4
-- Mouse
 - o:XML
 - Occam
 - Oz
-- Pike
 - Pizza
-- rc
 - Samora
 - Swift (parallel scripting language)
 - TeX
@@ -158,6 +161,7 @@ The hardest part was to not get lost in parentheses.
 - Perl
 - PHP(7)
 - PicoLisp
+- Pike
 - Pony
 - PostScript
 - Powershell
@@ -268,3 +272,10 @@ The hardest part was to not get lost in parentheses.
 - Idris - version 2 is incomplete, version 1 does not run (missing library)
 - Mojo - not for Arch Linux
 - PascalABC.NET - fails to install
+- Eel - not even example works
+- rc - not available
+- Elm - designed to run in browser, no I/O
+- FlooP - no documentation, looks like it does not have I/O
+- Harbour - cannot build and not for arch linux
+- Mouse - cannot obtain
+- Falcon - cannot build; compilation errors
