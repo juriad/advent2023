@@ -52,6 +52,16 @@ The first implementation was keeping track of the history of each seed, I was ho
 I wanted to read the input only once, which meant that I needed to simulate both parts at the same time.
 Some errors were caused by interval artithmetics.
 
+## Day 6 - K(ona)
+
+Very terse language where you feel great accomplishment after writing few characters and it works.
+It rarely works on the first attemp.
+The error messages are pretty bad in comparison to APL/BQN.
+
+This task was perfect for an array based languages that has been on my list for a while.
+I found a mathematical solution which could be doable with a pencil on a paper.
+The second part surprised me; I guessed something with maximizing distance.
+
 # Lists
 
 ## Language pool
@@ -72,7 +82,6 @@ Some errors were caused by interval artithmetics.
 - Fleng
 - High Level Assembly
 - J
-- K
 - LogTalk
 - m4
 - o:XML
@@ -141,6 +150,7 @@ Some errors were caused by interval artithmetics.
 - jq
 - JudoScript
 - Julia
+- K(ona)
 - Kotlin
 - LDPL
 - (Common)Lisp
