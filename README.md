@@ -62,11 +62,18 @@ This task was perfect for an array based languages that has been on my list for 
 I found a mathematical solution which could be doable with a pencil on a paper.
 The second part surprised me; I guessed something with maximizing distance.
 
+## Day 7 - Arturo
+
+There were quite a few WTF moments during reading of the documentation as the syntax looks very arbitrary, but in the end it makes sense.
+I appreciate the decent standard library as well as easy input and output.
+
+I liked the task; I was fighting with sort function until I resorted to encode the value into a number instead of arrays.
+In the second part it was enough just to try all possible values of the jokers.
+
 # Lists
 
 ## Language pool
 
-- Arturo
 - ATS - cannot install
 - C#
 - CDuce
@@ -102,6 +109,7 @@ The second part surprised me; I guessed something with maximizing distance.
 - Ada
 - Algol 68
 - APL
+- Arturo
 - AWK
 - Ballerina
 - Bash
