@@ -1,0 +1,160 @@
+-initialization(main).
+-arguments('+HEAP 1000m +GOALS 10m').
+
+-struct(graph(left, right)).
+
+main :-
+	command_line(Args),
+	list:nth(1, Args, FileName),
+	open_file(FileName, r, File),
+	io:read_lines(File, Stream),
+	parse(Header, Graph, Starts, Ends, Stream, Parsed),
+	when(Parsed, close_file(File)),
+	when(Parsed, process(Header, Graph, Starts, Ends)).
+
+parse(Header, Graph, Starts, Ends, Stream, Done) :-
+	parseLine(Header, Stream, Rest1),
+	parseLine(_, Rest1, Rest),
+	parseGraph(Graph, Starts, Ends, Rest, Done).
+
+parseLine(Header, [Line | R], Rest) :-
+	Header = Line,
+	Rest = R.
+
+parseGraph(Graph, Starts, Ends, Lines, Done) :-
+	Len is 26 * 26 * 26,
+	array:make(int, Len, Left),
+	array:make(int, Len, Right),
+	Graph = graph(Left, Right),
+	parseGraph(Left, Right, Starts, Ends, Lines, Done).
+
+parseGraph(Left, Right, Starts, Ends, [Line | Rest], Done) :-
+	list:delete(40, Line, L1),
+	list:delete(41, L1, L2),
+	list:delete(44, L2, L3),
+	list:split(L3, 32, Groups),
+	list:nth(1, Groups, CG),
+	list:nth(3, Groups, LG),
+	list:nth(4, Groups, RG),
+	parseNode(CG, C),
+	parseNode(LG, L),
+	parseNode(RG, R),
+	%writeln([C, L, R]),
+	array:put(C, L, Left),
+	array:put(C, R, Right),
+	isStart(C, S),
+	isEnd(C, E),
+	addStart(St, C, S, Starts),
+	addEnd(En, C, E, Ends),
+	parseGraph(Left, Right, St, En, Rest, Done).
+parseGraph(_, _, Starts, Ends, [], Done) :-
+	Done = [],
+	Starts = [],
+	Ends = [].
+
+parseNode([N | Ns], R) :-
+	parseNode(Ns, R1),
+	R is (N - 65) + (26 * R1).
+parseNode([], R) :-
+	R is 0.
+
+addStart(St, S, 1, Starts) :-
+	Starts = [S | St].
+addStart(St, _, 0, Starts) :-
+	Starts = St.
+	
+addEnd(En, E, 1, Ends) :-
+	Ends = [E | En].
+addEnd(En, _, 0, Ends) :-
+	Ends = En.
+
+%constants() :-
+	%parseNode([65,65,65], N), % 0
+	%parseNode([90,90,65], N), % 675
+	%parseNode([65,65,90], N), % 16900
+	%parseNode([90,90,90], N), % 17575
+	%parseNode([66,66,65], N), % 27
+	%writeln(N),
+
+process(Header, Graph, Starts, _) :-
+	%writeln(Starts),
+	%writeln(Ends),
+	walk([0], _, 0, Steps, Graph, Header, _, 0),
+	writeln(Steps),
+	%writeln([Finishes, Steps]).
+	%testPeriods(Header, Graph, 407, 0).
+	findPeriods(Header, Graph, Starts, Periods)
+	&
+	lcm(Periods, LCM),
+	%writeln(Periods),
+	writeln(LCM).
+
+
+gcd(X, Y, GCD) :- Y > 0 |
+	compute(mod, X, Y, H),
+	gcd(Y, H, GCD).
+gcd(X, 0, GCD) :-
+	GCD is X.
+
+lcm(X, Y, LCM) :-
+	gcd(X, Y, GCD),
+	P is X * Y,
+	LCM is P / GCD.
+lcm([], LCM) :-
+	LCM = 1.
+lcm([X | Xs], LCM) :-
+	lcm(Xs, LCM2),
+	lcm(X, LCM2, LCM).
+	
+testPeriods(Header, Graph, N, Prev) :-
+	walk([N], [F], Prev, Steps, Graph, Header, EH, 0),
+	P is Steps - Prev,
+	writeln([N, F, P]),
+	testPeriods(EH, Graph, F, Steps).
+	true.
+
+findPeriods(Header, Graph, [S | Starts], Periods) :-
+	walk([S], _, 0, Steps, Graph, Header, _, 0),
+	findPeriods(Header, Graph, Starts, Ps),
+	Periods = [Steps | Ps].
+findPeriods(_, _, [], Periods) :-
+	Periods = [].
+	
+walk(Curs, Finishes, Prev, Steps, graph(Left, Right), [76 | Rest], EndHeader, 0) :-
+	%writeln([76, Prev, Curs]),
+	list:append(Rest, [76], Header),
+	step(Curs, Left, Nexts, Ends),
+	S is Prev + 1,
+	walk(Nexts, Finishes, S, Steps, graph(Left, Right), Header, EndHeader, Ends).
+
+walk(Curs, Finishes, Prev, Steps, graph(Left, Right), [82 | Rest], EndHeader, 0) :-
+	%writeln([82, Prev, Curs]),
+	list:append(Rest, [82], Header),
+	step(Curs, Right, Nexts, Ends),
+	S is Prev + 1,
+	walk(Nexts, Finishes, S, Steps, graph(Left, Right), Header, EndHeader, Ends).
+
+walk(Curs, Finishes, Prev, Steps, _, Header, EndHeader, 1) :-
+	Steps is Prev,
+	Finishes = Curs,
+	EndHeader = Header.
+	
+step([Cur | Curs], Arr, Ns, EndAll) :-
+	array:get(Cur, 1, Arr, [Next]),
+	step(Curs, Arr, Nexts, Ends),
+	Ns = [Next | Nexts],
+	isEnd(Next, End),
+	EndAll is Ends * End.
+step([], _, N, End) :-
+	End is 1,
+	N = [].
+
+isEnd(Num, End) :- Num >= 16900 |
+	End is 1.
+isEnd(Num, End) :- Num < 16900 |
+	End is 0.
+	
+isStart(Num, End) :- Num =< 675 |
+	End is 1.
+isStart(Num, End) :- Num > 675 |
+	End is 0.

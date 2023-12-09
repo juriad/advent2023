@@ -70,6 +70,19 @@ I appreciate the decent standard library as well as easy input and output.
 I liked the task; I was fighting with sort function until I resorted to encode the value into a number instead of arrays.
 In the second part it was enough just to try all possible values of the jokers.
 
+## Day 8 - FGHC (Fleng)
+
+Same syntax as Prolog but is inherently parallel? That is something to try.
+Some parts are not obvious from the documentation, such as how to use streams.
+Unfortunately, the language is hard to debug; I spent hours trying to find why it deadlocks.
+I had wrong order of parameters.
+
+The task was nice that it could use static size of an array - just interpret all locations in base26.
+The second part has bad explanation - it is not clear why the paths never visit another end.
+It is also weird that there is no prefix to the loop.
+I guess the simplification is given by the author and we are lucky that we don't need to work more.
+
+
 # Lists
 
 ## Language pool
@@ -86,13 +99,12 @@ In the second part it was enough just to try all possible values of the jokers.
 - F*
 - Fetlang
 - Fish
-- Fleng
 - High Level Assembly
 - J
 - LogTalk
 - m4
+- Modula-2 - does not download
 - o:XML
-- Occam
 - Oz
 - Pizza
 - Samora
@@ -137,6 +149,7 @@ In the second part it was enough just to try all possible values of the jokers.
 - Erlang
 - Factor
 - Fantom
+- FGHC
 - Flix
 - Forth
 - Fortran
@@ -279,7 +292,6 @@ In the second part it was enough just to try all possible values of the jokers.
 - AmbientTalk - not much of input, cannot work with files
 - Alice - dialect of Standard ML
 - ML - just a family of languages
-- Modula-2 - does not download
 - J# - discontinued
 - Wyvern - too poor documentation
 - Hamler - did not manage to build
@@ -297,3 +309,4 @@ In the second part it was enough just to try all possible values of the jokers.
 - Harbour - cannot build and not for arch linux
 - Mouse - cannot obtain
 - Falcon - cannot build; compilation errors
+- Occam - cannot build; compilation error
