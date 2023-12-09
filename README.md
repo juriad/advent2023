@@ -82,6 +82,17 @@ The second part has bad explanation - it is not clear why the paths never visit 
 It is also weird that there is no prefix to the loop.
 I guess the simplification is given by the author and we are lucky that we don't need to work more.
 
+## Day 9 - CoffeeScript
+
+I banned a lot of languages today; way too many and so I had to choose a simple language to catch up.
+Not knowing anything about CoffeeScript I was worried that it will be too similar to JavaSxcript; it was not.
+I was suprised how natural it felt, but I also understand why the community chose TypeScript instead.
+They tried to put all ideas, good or bad into the language.
+
+So easy task was nice.
+I did not care about detection all zeros; I went all the way down.
+The second part just needed two reverses, cute.
+
 
 # Lists
 
@@ -89,31 +100,21 @@ I guess the simplification is given by the author and we are lucky that we don't
 
 - ATS - cannot install
 - C#
-- CDuce
 - CLIPS
-- CoffeeScript
 - Constraint Handling Rules
 - Csh
-- Emojicode
 - F#
 - F*
-- Fetlang
 - Fish
 - High Level Assembly
-- J
 - LogTalk
 - m4
 - Modula-2 - does not download
-- o:XML
 - Oz
 - Pizza
-- Samora
 - Swift (parallel scripting language)
 - TeX
 - TypeScript
-- Umple
-- WolframScript
-- xHarbour
 - Xtend
 
 ## Used languages
@@ -136,6 +137,7 @@ I guess the simplification is given by the author and we are lucky that we don't
 - Closure
 - Cobol
 - Cobra
+- CoffeeScript
 - ColdFusion Markup Language (CFML)
 - Concurnas
 - Crystal
@@ -310,3 +312,12 @@ I guess the simplification is given by the author and we are lucky that we don't
 - Mouse - cannot obtain
 - Falcon - cannot build; compilation errors
 - Occam - cannot build; compilation error
+- Emojicode - fails to compile
+- Fetlang - does not have functions, jump nor pointers
+- J - installs but does not seem to work
+- Umple - not a programming language, used for modeling
+- o:XML - very abandoned, 404, no idea how to execute
+- WolframScript - requires account
+- harbour - fails to build
+- CDuce - seems to be incompatible with newer version of OCaml
+- Samora - barely works; does not parse any more advanced program
