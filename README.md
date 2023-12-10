@@ -93,6 +93,17 @@ So easy task was nice.
 I did not care about detection all zeros; I went all the way down.
 The second part just needed two reverses, cute.
 
+## Day 10 - Modula-2
+
+I read about Modula-2 getting support from GCC last year.
+The development is slower than I anticipated; it is merged in master but not official release yet.
+I had to compile my own GCC with suppoer for Modula-2.
+The language is pretty straghtforward; I liked the suport for types (enums, sets).
+On the other hand GCC does not support the extension of dynamic arrays.
+There are still a few issues and I will be filing bug reports.
+
+I liked that I could represent the capabilities of every tile with a set (bit mask in fact).
+The second task made me remmeber the sweeping algorithm; there was just extra care needed due to horizontal pipes.
 
 # Lists
 
@@ -106,14 +117,25 @@ The second part just needed two reverses, cute.
 - F#
 - F*
 - Fish
+- Guile
+- Hack
 - High Level Assembly
+- Inform 7
+- Joy - does not compile, almost no documentation
+- LFE
 - LogTalk
 - m4
-- Modula-2 - does not download
+- MUMPS
+- NESL
 - Oz
 - Pizza
+- PL/I
+- ReasonML - not even tutorial can be build
+- Sather - no doc how to work with strings
 - Swift (parallel scripting language)
+- Tea - archived; does not have documentation
 - TeX
+- Turing (TPlus)
 - TypeScript
 - Xtend
 
@@ -182,6 +204,7 @@ The second part just needed two reverses, cute.
 - Matlab (Octave)
 - Mercury
 - Minizinc
+- Modula-2
 - MoonScript
 - NASM
 - Neko
@@ -249,7 +272,6 @@ The second part just needed two reverses, cute.
 - ActionScript - Cannot be downloaded
 - Pure - requires different version of LLVM which fails to compile
 - Eta - too close to Haskell on JVM
-- Joy - does not compile, almost no documentation
 - Whiley - could not make the example to work; it does not produce a class file
 - Kit - discontinued, crucial parts of documentations are missing
 - Snowball - not really a programming language
@@ -263,13 +285,11 @@ The second part just needed two reverses, cute.
 - Processing - just a Java "library"
 - Limbo - language for Inferno operating system
 - Nu - could not figure out input
-- Sather - no doc how to work with strings
 - Ksh - too close to a regular Shell/Bash
 - Whiley - cannot handle input
 - Cool - school course, does not exists
 - eC - almost no documentation
 - ParaSail - could not figure out standard library (input)
-- Tea - archived; does not have documentation
 - Nickel - configuration, does not have input
 - Ezhil - non ascii, non English
 - Nemerle - Mono crashes
@@ -297,7 +317,6 @@ The second part just needed two reverses, cute.
 - J# - discontinued
 - Wyvern - too poor documentation
 - Hamler - did not manage to build
-- ReasonML - not even tutorial can be build
 - ABC - cannot make work with termcap/curses
 - BCPL - almost no documentation; cannot find how to do input
 - CLU - cannot make run
