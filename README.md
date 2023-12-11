@@ -105,6 +105,17 @@ There are still a few issues and I will be filing bug reports.
 I liked that I could represent the capabilities of every tile with a set (bit mask in fact).
 The second task made me remmeber the sweeping algorithm; there was just extra care needed due to horizontal pipes.
 
+## Turing Plus
+
+While Modula was compiling yesterday, I prepared another language as a backup, which I ended up using today.
+Turing Plus is decent, does its job.
+I liked the support for dynamic arrays and no hassle input and output.
+
+Immediately after reading the task, I knew how to represent the galaxy - list of points and list of sizes of rows and columns in prefix arrays.
+This allows to compute distances in constant time.
+The second part was expected and easy.
+I just had to switch from using ints to reals because my poor ints overflowed.
+
 # Lists
 
 ## Language pool
@@ -135,9 +146,9 @@ The second task made me remmeber the sweeping algorithm; there was just extra ca
 - Swift (parallel scripting language)
 - Tea - archived; does not have documentation
 - TeX
-- Turing (TPlus)
 - TypeScript
 - Xtend
+- Zonnon
 
 ## Used languages
 
@@ -245,6 +256,7 @@ The second task made me remmeber the sweeping algorithm; there was just extra ca
 - Standard ML
 - Swift
 - TCL
+- Turing Plus
 - TXL
 - Unison
 - Vala
