@@ -1,0 +1,179 @@
+#!/usr/bin/guile \
+-e main -s
+!#
+
+(use-modules (ice-9 textual-ports))
+(use-modules (ice-9 receive))
+(use-modules (ice-9 rdelim))
+
+
+(define (gap ch) (char=? ch #\.))
+(define (wall ch) (char=? ch #\#))
+(define (qst ch) (char=? ch #\?))
+
+(define (notgap ch) (or (wall ch) (qst ch)))
+(define (notwall ch) (or (gap ch) (qst ch)))
+(define (notqst ch) (or (gap ch) (wall ch)))
+
+
+(define (can-contain pattern grp x)
+	(or
+		(= grp 0)
+		(and
+			(notgap (array-ref pattern x))
+			(can-contain pattern (- grp 1) (- x 1))
+		)
+	)
+)
+
+(define (can-start pattern grp x)
+	(or ; condition for beginning
+		(= (- grp 1) x) ; starts at the index 0
+		(and
+			(< (- grp 1) x) ; starts later
+			(notwall (array-ref pattern (- x grp))) ; char before is not wall
+		)
+	)
+)
+
+(define (can-end pattern grp x)
+	(or ; condition for end
+		(= (- (array-length pattern) 1) x) ; aligned at the end
+		(and
+			(> (- (array-length pattern) 1) x) ; ends earlier
+			(notwall (array-ref pattern (+ x 1))) ; char after
+		)
+	)
+)
+
+(define (can-fit pattern grp x)
+	(and 
+		(can-start pattern grp x)
+		(can-end pattern grp x)
+		(can-contain pattern grp x)			
+	)
+)
+
+(define (notwall-before pattern x)
+	(or
+		(< x 0)
+		(and
+			(notwall (array-ref pattern x))
+			(notwall-before pattern (- x 1))
+		)
+	)
+)
+
+(define (options-before pattern g arr prev)
+	(cond
+		((and (= g 0) (notwall-before pattern prev)) 1) ; first group starts with 1
+		((= g 0) 0) ; but after a wall it has 0
+		((< prev 0) 0) ; too early
+		((wall (array-ref pattern prev)) (array-ref arr prev (- g 1)))
+		(else 
+			(+
+				(array-ref arr prev (- g 1))
+				(options-before pattern g arr (- prev 1))
+			)
+		)
+	)
+)
+
+(define (process-group pattern g grp arr)
+	; (display g)
+	; (display #\space)
+	; (display grp)
+	; (newline)
+	(do ((x (- grp 1) (1+ x))) ; init + step x
+		((>= x (array-length pattern))) ; after end
+		
+		(when (can-fit pattern grp x)
+			(array-set! arr (options-before pattern g arr (- x grp 1)) x g)
+			; (display x)
+			; (display #\space)
+		)
+	)
+)
+
+(define (compute-array groups pattern arr)
+	(do ((g 0 (1+ g)))
+		((>= g (array-length groups)))
+		
+		(process-group pattern g (array-ref groups g) arr)
+		; (display arr)
+		; (newline)
+	)
+)
+
+(define (process pattern-list groups-list)
+	(let* (
+		(groups (list->array 1 groups-list))
+		(pattern (list->array 1 pattern-list))
+		(arr (make-array 0 (length pattern-list) (length groups-list)))
+		(nope (compute-array groups pattern arr))
+		(count (options-before pattern (array-length groups) arr (- (array-length pattern) 1)))
+		)
+		
+		; (display pattern)
+		; (newline)
+		count
+	)
+)
+
+(define (range t)
+	(if (<= t 0)
+		'() 
+		(cons t (range (- t 1)))
+	)
+)
+
+(define (process-times times pattern nums)
+	(let* (
+		(r (range times))
+		(pattern-times (map (lambda (x) (cons #\? pattern)) r))
+		(pattern-new (cdr (apply append pattern-times)))
+		(nums-times (map (lambda (x) nums) r))
+		(nums-new (apply append nums-times))
+		)
+		; (newline)
+		; (display pattern)
+		; (newline)
+		; (display nums-new)
+		; (newline)
+		(process pattern-new nums-new)
+	)
+)
+
+(define (process-line line)
+	(let* (
+		(head-tail (string-split line #\space))
+		(pattern (string->list (car head-tail)))
+		(nums (map string->number (string-split (cadr head-tail) #\,)))
+		(counts1 (process pattern nums))
+		(counts2 (process-times 5 pattern nums))
+		)
+		(list counts1 counts2)
+	)
+)
+
+(define (main args)
+	(call-with-input-file (cadr args)
+		(lambda (port)
+			(let* (
+				(file (read-delimited "!" port))
+				(lines (string-split (string-trim-both file) #\newline))
+				(processed (map process-line lines))
+				(sum1 (apply + (map car processed)))
+				(sum2 (apply + (map cadr processed)))
+				)
+				; (display processed)
+				(display (list sum1 sum2))
+				(newline)
+			)	
+		)
+	)
+)
+
+
+
+

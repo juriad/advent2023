@@ -116,6 +116,19 @@ This allows to compute distances in constant time.
 The second part was expected and easy.
 I just had to switch from using ints to reals because my poor ints overflowed.
 
+## Guile
+
+Another dialect of Lisp/Scheme.
+How easy it is to get lost in the parentheses.
+I missed some basic functions like fold, zip, flatten.
+The input processing was also hard until I figured out that I can use non-existing delimiter and just read the whole file at once.
+
+I knew that I will need to use dynamic programming for this task.
+The algorithm is pretty easy but has lots of details of counting indices.
+The languages where even simpest arithmetics needs tripple checking did not help.
+The more I was surprised that it worked on the first trial.
+The second part was then just a trivial extension.
+
 # Lists
 
 ## Language pool
@@ -128,8 +141,6 @@ I just had to switch from using ints to reals because my poor ints overflowed.
 - F#
 - F*
 - Fish
-- Guile
-- Hack
 - High Level Assembly
 - Inform 7
 - Joy - does not compile, almost no documentation
@@ -142,7 +153,6 @@ I just had to switch from using ints to reals because my poor ints overflowed.
 - Pizza
 - PL/I
 - ReasonML - not even tutorial can be build
-- Sather - no doc how to work with strings
 - Swift (parallel scripting language)
 - Tea - archived; does not have documentation
 - TeX
@@ -194,6 +204,7 @@ I just had to switch from using ints to reals because my poor ints overflowed.
 - Golo
 - Gosu
 - Groovy
+- Guile
 - Hare
 - Haskell
 - Haxe
@@ -352,3 +363,5 @@ I just had to switch from using ints to reals because my poor ints overflowed.
 - harbour - fails to build
 - CDuce - seems to be incompatible with newer version of OCaml
 - Samora - barely works; does not parse any more advanced program
+- Sather - does not compile
+- Hack - does not compile
