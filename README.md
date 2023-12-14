@@ -105,7 +105,7 @@ There are still a few issues and I will be filing bug reports.
 I liked that I could represent the capabilities of every tile with a set (bit mask in fact).
 The second task made me remmeber the sweeping algorithm; there was just extra care needed due to horizontal pipes.
 
-## Turing Plus
+## Day 11 - Turing Plus
 
 While Modula was compiling yesterday, I prepared another language as a backup, which I ended up using today.
 Turing Plus is decent, does its job.
@@ -116,7 +116,7 @@ This allows to compute distances in constant time.
 The second part was expected and easy.
 I just had to switch from using ints to reals because my poor ints overflowed.
 
-## Guile
+## Day 12 - Guile
 
 Another dialect of Lisp/Scheme.
 How easy it is to get lost in the parentheses.
@@ -129,6 +129,15 @@ The languages where even simpest arithmetics needs tripple checking did not help
 The more I was surprised that it worked on the first trial.
 The second part was then just a trivial extension.
 
+## Day 13 - Fish
+
+More modern implementation of shell; I like it.
+There is no need for awkward quoting, subshells are easier too.
+The built-in commands are powerful enough to be generally useful.
+
+After preview task that was rather hard, this was an easy one.
+Even the twist with one smudge was solvable with just replacing the comparison function and employing a tiny regexp.
+
 # Lists
 
 ## Language pool
@@ -140,7 +149,6 @@ The second part was then just a trivial extension.
 - Csh
 - F#
 - F*
-- Fish
 - High Level Assembly
 - Inform 7
 - Joy - does not compile, almost no documentation
@@ -195,6 +203,7 @@ The second part was then just a trivial extension.
 - Factor
 - Fantom
 - FGHC
+- Fish
 - Flix
 - Forth
 - Fortran
