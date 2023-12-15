@@ -138,6 +138,18 @@ The built-in commands are powerful enough to be generally useful.
 After preview task that was rather hard, this was an easy one.
 Even the twist with one smudge was solvable with just replacing the comparison function and employing a tiny regexp.
 
+## Day 14 - Swift (parallel scripting language)
+
+It is hard to program with single assignment to variables.
+All things can be emulated via recursion but some are too painful.
+On top of that, the language is ridiculously slow while it is at the same time trying to melt the CPU.
+It manages to perform about 3 cycles a minute but if I add extra length checks that force synchronization, it runs twice as fast.
+I also found a bug in the compiler, where it incorrectly  detects cicular dependency between procedures.
+
+The task required just simple walk through 2D array and computing the result of the tilt.
+The second wants again to find a period and apply it to find a value too far in the future.
+I looked for the period manually.
+
 # Lists
 
 ## Language pool
@@ -156,17 +168,14 @@ Even the twist with one smudge was solvable with just replacing the comparison f
 - LogTalk
 - m4
 - MUMPS
-- NESL
 - Oz
 - Pizza
 - PL/I
 - ReasonML - not even tutorial can be build
-- Swift (parallel scripting language)
 - Tea - archived; does not have documentation
 - TeX
 - TypeScript
 - Xtend
-- Zonnon
 
 ## Used languages
 
@@ -275,6 +284,7 @@ Even the twist with one smudge was solvable with just replacing the comparison f
 - Squirrel
 - Standard ML
 - Swift
+- Swift (parallel scripting language)
 - TCL
 - Turing Plus
 - TXL
@@ -374,3 +384,5 @@ Even the twist with one smudge was solvable with just replacing the comparison f
 - Samora - barely works; does not parse any more advanced program
 - Sather - does not compile
 - Hack - does not compile
+- NESL - does not compile; and issues with Common Lisp after fixing C
+- Zonnon - website does not load, probably does not exist anymore
