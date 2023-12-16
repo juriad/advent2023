@@ -1,0 +1,293 @@
+program Prg;
+
+#include("stdlib.hhf")
+#include("fileio.hhf")
+#include("strings.hhf")
+
+type
+	lens: record
+		nam: string;
+		focal: uns32;
+		lens: pointer to lens;
+	endrecord;
+	
+	puns32: pointer to uns32;
+	plens: pointer to lens;
+
+var
+	fileHandle: dword;
+	fileSize: uns32;
+	input: string;
+	c: char;
+	index: uns32;
+
+storage
+	start: uns32;
+	hash: uns32;
+	sum: uns32;
+
+static
+	boxes: plens[256];
+
+proc
+	addName: procedure (hash: uns32; nam: string; focal: uns32; boxes: plens);
+	begin addName;
+		// stdout.put("add to ", hash, " name ", nam, " focal ", focal, nl);
+		
+		mov(hash, eax);
+		imul(4, eax);
+		add(boxes, eax);
+		
+		// pointer that is NULL
+		forever
+			mov([eax], ecx);
+			// stdout.put("points to ", ecx, nl);
+			if (ecx == NULL) then
+				break;
+			endif;
+			
+			mov([ecx], ebx);
+			if (str.eq(ebx, nam)) then
+				// stdout.put("found", nl);
+				
+				mov(focal, [ecx+4]);
+				str.free(nam);
+				mov(0, eax);
+				break;
+			endif;
+			
+			// stdout.put("hop", nl);
+			mov([eax], eax);
+			add(8, eax);
+		endfor;
+		
+		if (eax != 0) then
+			mov(eax, ecx);
+			
+			mem.zalloc(@size(lens)); // eax = plens
+			mov(eax, ebx);
+			mov(nam, [ebx]);
+			mov(focal, [ebx + 4]);
+			
+			mov(ebx, [ecx]);
+			
+			// stdout.put("lens", eax, nl);
+		endif;
+	end addName;
+	
+	removeName: procedure (hash: uns32; nam: string; boxes: plens);
+	begin removeName;
+		// stdout.put("remove from ", hash, " name ", nam, nl);
+		
+		mov(hash, eax);
+		imul(4, eax);
+		add(boxes, eax);
+		
+		forever
+			mov([eax], ecx);
+			// stdout.put("points to ", ecx, nl);
+			if (ecx == NULL) then
+				break;
+			endif;
+			
+			mov([ecx], ebx);
+			if (str.eq(ebx, nam)) then
+				// stdout.put("found", nl);
+				str.free(ebx);
+				
+				mov([ecx+8], ebx);
+				mov(ebx, [eax]);
+				break;
+			endif;
+			
+			// stdout.put("hop", nl);
+			mov([eax], eax);
+			add(8, eax);
+		endfor;
+		
+		str.free(nam);
+		
+	end removeName;
+
+	parseName: procedure (input: string; index: uns32; start: uns32) {@returns("eax")};
+	begin parseName;
+		// stdout.put("index ", index, " start ", start, nl);
+	
+		mov(index, eax);
+		sub(start, eax); // length
+		str.a_substr(input, start, eax);
+		//stdout.put("name ", (type string eax), nl);
+	end parseName;
+	
+	updateHash: procedure (c: char; hash: puns32);
+	begin updateHash;
+	
+		// *hash = (*hash + c) * 17 & 255
+		mov((type uns32 c), eax);
+		mov(hash, ebx);
+		add([ebx], eax);
+		imul(17, eax);
+		and($FF, eax);
+		mov(eax, [ebx]);
+	end updateHash;
+
+	delimiter: procedure (hash: puns32; sum: puns32; index: uns32; start: puns32);
+	begin delimiter;
+	
+		// *start = index + 1
+		mov(index, eax);
+		inc(eax);
+		mov(start, ebx);
+		mov(eax, [ebx]);
+
+		// *sum += *hash
+		mov(hash, ebx);
+		mov([ebx], eax);
+		mov(sum, ecx);
+		add(eax, [ecx]);
+		// stdout.put("hash ", (type uns32 eax), nl);
+
+		// *hash = 0		
+		mov(0, eax);
+		mov(eax, [ebx]);
+	end delimiter;
+	
+	parseFocal: procedure(input: string; index: uns32);
+	begin parseFocal;
+	
+		mov(input, eax);
+		add(index, eax);
+		inc(eax);
+		mov([eax], al);
+		and($FF, eax);
+		sub('0', eax);
+	end parseFocal;
+
+	processChar: procedure(input: string; hash: puns32; sum: puns32; index: uns32; start: puns32; boxes: plens);
+	var
+		c: char;
+	begin processChar;
+		mov(input, eax);
+		add(index, eax);
+		mov([eax], al);
+		mov(al, c);
+		
+		// stdout.put("char ", c, nl);
+		
+		if (c == ',') then
+			delimiter(hash, sum, index, start);
+		elseif (c == #10) then
+			delimiter(hash, sum, index, start);
+		elseif (c == #0) then
+			delimiter(hash, sum, index, start);
+		else
+			mov(start, eax);
+			mov(hash, ecx);
+			if (c == '-') then
+				parseName(input, index, [eax]);
+				removeName([ecx], eax, boxes);
+			elseif (c == '=') then
+				parseName(input, index, [eax]);
+				mov(eax, ebx);
+				parseFocal(input, index);
+				// stdout.put("focal ", (type uns32 eax), nl);
+				addName([ecx], ebx, eax, boxes);
+			endif;
+			
+			updateHash(c, hash);
+		endif;
+	end processChar;
+	
+	sumBox: procedure(box: plens; bn: uns32; c: uns32) {@returns("eax")};
+	begin sumBox;
+		mov(0, eax);
+		if (box != NULL) then
+			// stdout.put("bn ", bn, " c ", c, nl);
+			mov(box, ebx);
+			mov(c, ecx);
+			add(1, ecx);
+			sumBox([ebx+8], bn, ecx); // eax = prev
+			mov(eax, ecx);
+			
+			mov(box, ebx);
+			mov([ebx+4], ebx);
+			
+			mov(bn, eax);
+			inc(eax);
+			
+			mul(c, eax);
+			mul(ebx, eax);
+			
+			// stdout.put("power ", (type uns32 eax), nl);
+			
+			add(ecx, eax);
+		endif;
+	end sumBox;
+
+	sumPower: procedure(boxes: plens) {@returns("eax")};
+	var
+		sum: uns32;
+		index: uns32;
+	begin sumPower;
+		mov(0, sum);
+		mov(0, index);
+		forever
+			//stdout.put("i ", ebx, nl);
+			
+			mov(index, eax);
+			imul(4, eax);
+			add(boxes, eax);
+			
+			sumBox([eax], index, 1);
+			add(eax, sum);
+			
+			inc(index);
+			if (index > 255) then
+				break;
+			endif;
+		endfor;
+		mov(sum, eax);
+	end sumPower;
+	
+begin Prg;
+
+	arg.v(1); // eax = filename ptr
+	
+	// stdout.put("filename ", (type string eax), nl);
+
+	fileio.open(eax, fileio.r); // eax = file
+	mov(eax, fileHandle);
+	
+	filesys.size(fileHandle); // eax = file size
+	mov(eax, fileSize);
+	
+	// stdout.put("size ", fileSize, nl);
+	
+	str.alloc(fileSize);
+	mov(eax, input);
+	
+	fileio.gets(fileHandle, input);
+	
+	// stdout.put("input ", input, nl);
+	
+	mov(0, hash);
+	mov(0, sum);
+	mov(0, index);
+	mov(0, start);
+	
+	repeat
+		processChar(input, &hash, &sum, index, &start, &boxes);
+		
+		inc(index);
+		mov(fileSize, eax);
+	until(index >= eax);
+	str.free(input);
+
+	fileio.close(fileHandle);
+	
+	stdout.put("sum ", sum, nl);
+	
+	sumPower(&boxes);
+	stdout.put("power ", (type uns32 eax), nl);
+
+end Prg;

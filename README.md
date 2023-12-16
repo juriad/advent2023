@@ -150,6 +150,18 @@ The task required just simple walk through 2D array and computing the result of 
 The second wants again to find a period and apply it to find a value too far in the future.
 I looked for the period manually.
 
+## Day 15 - High Level Assembly
+
+Seamingly nice language, has huge documentation but few examples.
+It assumes lots of prior knowledge.
+Some errors are cryptical and often stem from sinly such instruction not existing.
+
+I was excited about the task because that hash calculation will be so easy in assembly.
+Just process it character at a time, no memory management.
+I hugely underestimated the second part.
+That required pretty much complete rework.
+I had to implement linked lists in assembly.
+
 # Lists
 
 ## Language pool
@@ -161,7 +173,6 @@ I looked for the period manually.
 - Csh
 - F#
 - F*
-- High Level Assembly
 - Inform 7
 - Joy - does not compile, almost no documentation
 - LFE
