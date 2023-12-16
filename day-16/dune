@@ -1,0 +1,5 @@
+(executable
+ (name prg)
+ (public_name prg)
+ (libraries str)
+)

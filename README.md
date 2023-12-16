@@ -162,6 +162,16 @@ I hugely underestimated the second part.
 That required pretty much complete rework.
 I had to implement linked lists in assembly.
 
+## Day 16 - Reason
+
+Quite pleasant language with rich enough library and documentation.
+It is not completely functional but it is reasonably close.
+The only negative was that it does not have a generic print function for debugging.
+
+The task was quite simple flood algorithm, in my case implemented using a stack.
+I reused the idea of bitsets to mark from which direction a beam comes to a tile.
+The second part was easier than expected; I assumed that we will be tilting mirrors again.
+
 # Lists
 
 ## Language pool
@@ -182,8 +192,6 @@ I had to implement linked lists in assembly.
 - Oz
 - Pizza
 - PL/I
-- ReasonML - not even tutorial can be build
-- Tea - archived; does not have documentation
 - TeX
 - TypeScript
 - Xtend
@@ -237,6 +245,7 @@ I had to implement linked lists in assembly.
 - Hare
 - Haskell
 - Haxe
+- High Level Assembly
 - Hy
 - Icon
 - Io
@@ -278,6 +287,7 @@ I had to implement linked lists in assembly.
 - R
 - Racket
 - Raku
+- Reason
 - Rebol
 - Red
 - Rexx
@@ -397,3 +407,4 @@ I had to implement linked lists in assembly.
 - Hack - does not compile
 - NESL - does not compile; and issues with Common Lisp after fixing C
 - Zonnon - website does not load, probably does not exist anymore
+- Tea - archived; cannot be downloaded
