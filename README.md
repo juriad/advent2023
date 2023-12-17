@@ -172,14 +172,22 @@ The task was quite simple flood algorithm, in my case implemented using a stack.
 I reused the idea of bitsets to mark from which direction a beam comes to a tile.
 The second part was easier than expected; I assumed that we will be tilting mirrors again.
 
+## Day 17 - Pizza
+
+Pizza is a dead branch of Java.
+From today's perspective it does not bring much new.
+It goes a bit further with algebraic data types and functions but modern Java probably does it better.
+Its tiny library has quite archaic and inconvenient API.
+
+I did not attempt to implemet any sophisticated algorithm, just flooding with a queue.
+But I focused on modeling of the task, which paid off in the second part, where it was trivial to extend.
+
 # Lists
 
 ## Language pool
 
-- ATS - cannot install
 - C#
 - CLIPS
-- Constraint Handling Rules
 - Csh
 - F#
 - F*
@@ -190,7 +198,6 @@ The second part was easier than expected; I assumed that we will be tilting mirr
 - m4
 - MUMPS
 - Oz
-- Pizza
 - PL/I
 - TeX
 - TypeScript
@@ -278,6 +285,7 @@ The second part was easier than expected; I assumed that we will be tilting mirr
 - PHP(7)
 - PicoLisp
 - Pike
+- Pizza
 - Pony
 - PostScript
 - Powershell
@@ -408,3 +416,5 @@ The second part was easier than expected; I assumed that we will be tilting mirr
 - NESL - does not compile; and issues with Common Lisp after fixing C
 - Zonnon - website does not load, probably does not exist anymore
 - Tea - archived; cannot be downloaded
+- ATS - cannot install, fails to build
+- Constraint Handling Rules - not standalone

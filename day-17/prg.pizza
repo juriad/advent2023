@@ -1,0 +1,264 @@
+import java.io.*;
+import net.sf.pizzacompiler.lang.*;
+import net.sf.pizzacompiler.util.*;
+
+class Grid {
+	case Grid(int[][] grid);
+	
+	boolean inRange(int y, int x) {
+		return y >= 0 && y < grid.length
+			&& x >= 0 && x < grid[0].length;
+	}
+	
+	boolean inRange(Tile t) {
+		return inRange(t.y, t.x);
+	}
+	
+	int get(int y, int x) {
+		return grid[y][x];
+	}
+	
+	int get(Tile t) {
+		return get(t.y, t.x);
+	}
+	
+	int maxY() {
+		return grid.length - 1;
+	}
+	
+	int maxX() {
+		return grid[0].length - 1;
+	}
+}
+
+class Crucible {
+	case Crucible(int min, int max);
+}
+
+class Dir {
+	case North;
+	case South;
+	case East;
+	case West;
+	
+	public boolean equals(Object o) {
+		return this == o;
+	}
+	
+	public int hashCode() {
+		return Dir$$tag;
+	}
+}
+
+class Tile {
+	case Tile(int y, int x, Dir dir);
+	
+	Tile north() {
+		return Tile(y - 1, x, Dir.North);
+	}
+	Tile south() {
+		return Tile(y + 1, x, Dir.South);
+	}
+	Tile east() {
+		return Tile(y, x + 1, Dir.East);
+	}
+	Tile west() {
+		return Tile(y, x - 1, Dir.West);
+	}
+	
+	Tile go(Dir dir) {
+		switch(dir) {
+			case North:
+				return north();
+			case South:
+				return south();
+			case East:
+				return east();
+			case West:
+				return west();
+		}
+	}
+	
+	TileVisit visit(int dist) {
+		return TileVisit.TileVisit(this, dist);
+	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof Tile) {
+			Tile t = (Tile) o;
+			return x == t.x && y == t.y && dir.equals(t.dir);
+		}
+		return false;
+	}
+	
+	public int hashCode() {
+		return y * 17 * 17 + x * 17 + dir.hashCode();
+	}
+}
+
+class TileVisit {
+	case TileVisit(Tile tile, int dist);
+	
+	List<TileVisit> go(Grid grid, Crucible c) {
+		switch(tile.dir) {
+			case North:
+			case South:
+				return goHoriz(grid, c);
+			case East:
+			case West:
+				return goVert(grid, c);
+		}
+	}
+	
+	List<TileVisit> goHoriz(Grid grid, Crucible c) {
+		ListBuffer<TileVisit> cand = new ListBuffer();
+		go(grid, c, cand, Dir.East);
+		go(grid, c, cand, Dir.West);
+		return cand.toList();
+	}
+	
+	List<TileVisit> goVert(Grid grid, Crucible c) {
+		ListBuffer<TileVisit> cand = new ListBuffer();
+		go(grid, c, cand, Dir.North);
+		go(grid, c, cand, Dir.South);
+		return cand.toList();
+	}
+	
+	void go(Grid grid, Crucible c, ListBuffer<TileVisit> cand, Dir dir) {
+		int d = dist;
+		Tile cur = tile;
+		for (int i = 1; i <= c.max; i++) {
+			cur = cur.go(dir);
+			if (grid.inRange(cur)) {
+				d += grid.get(cur);
+				if (i >= c.min) {
+					cand.append(TileVisit.TileVisit(cur, d));
+				}
+			}
+		}
+	}
+}
+
+class Routing {
+	case Routing(Grid grid);
+	
+	void printMap(Dictionary<Tile, Integer> map) {
+		Dir[] dirs = new Dir[] {Dir.North, Dir.East, Dir.South, Dir.West};
+		for(int y = 0; y <= grid.maxY(); y++) {
+			for (int x = 0; x <= grid.maxX(); x++) {
+				System.out.print(grid.get(y, x) + "\t");
+			}
+			System.out.println();
+			for (int d = 0; d < 4; d++) {
+				Dir dir = dirs[d];
+				for (int x = 0; x <= grid.maxX(); x++) {
+					Integer dist = map.get(Tile.Tile(y, x, dir));
+					System.out.print(dist + "\t");
+				}
+				System.out.println();
+			}
+			System.out.println();
+			System.out.println();
+		}
+	}
+	
+	int fromTo(Tile[] starts, Tile[] ends, Crucible crucible) {
+		Dictionary<Tile, Integer> map = new Hashtable();
+		Vector<Tile> q = new Vector(fun(int size) -> Tile[] {
+			return new Tile[size];
+		}, null);
+		Set<Tile> pending = new Set();
+		
+		for (int i = 0; i < starts.length; i++) {
+			Tile start = starts[i];
+			q.addElement(start);
+			map.put(start, Integer.valueOf(0));
+		}
+		
+		int index = 0;
+		while (index < q.size()) {
+			Tile t = q.elementAt(index);
+			index++;
+			pending.remove(t);
+			
+			// System.out.println("q " + q.size() 
+			//	+ " " + (q.size() - index)
+			//	+ " m " + map.size());
+			
+			int dist = map.get(t).intValue();
+			t.visit(dist).go(grid, crucible).forall(fun(TileVisit tv) -> void {
+				Integer d = map.get(tv.tile);
+				if (d == null || d.intValue() > tv.dist) {
+					map.remove(tv.tile);
+					map.put(tv.tile, Integer.valueOf(tv.dist));
+					if (!pending.contains(tv.tile)) {
+						pending.put(tv.tile);
+						q.addElement(tv.tile);
+					}
+				}
+			});
+		}
+		
+		// printMap(map);
+		
+		int best = Integer.MAX_VALUE;
+		for (int i = 0; i < ends.length; i++) {
+			Tile end = ends[i];
+			Integer e = map.get(end);
+			if (e != null && e.intValue() < best) {
+				best = e.intValue();
+			}
+		}
+		return best;
+	}
+}
+
+public class Prg {
+	static int[] parseLine(String line) {
+		int[] row = new int[line.length()];
+		for (int i = 0; i < line.length(); i++) {
+			row[i] = Integer.parseInt(line.substring(i, i + 1));
+		}
+		return row;
+	}
+
+	static Grid readInput(String fileName) throws IOException {
+		ListBuffer<int[]> rows = new ListBuffer();
+		InputStream is = new FileInputStream(fileName);
+		BufferedReader r = new BufferedReader(new InputStreamReader(is));
+		String line;
+		while ((line = r.readLine()) != null) {
+			int[] row = parseLine(line);
+			rows.append(row);
+		}
+		
+		int[][] grid = new int[rows.length()][];
+		for (int i = 0; i < rows.length(); i++) {
+			grid[i] = rows.getAt(i);
+		}
+		return Grid.Grid(grid);
+	}
+
+	public static void main(String[] args) throws IOException {
+		Grid grid = readInput(args[0]);
+		
+		Tile s1 = Tile.Tile(0, 0, Dir.South);
+		Tile s2 = Tile.Tile(0, 0, Dir.East);
+		Tile e1 = Tile.Tile(grid.maxY(), grid.maxX(), Dir.South);
+		Tile e2 = Tile.Tile(grid.maxY(), grid.maxX(), Dir.East);
+		
+		Tile[] ss = new Tile[] {s1, s2};
+		Tile[] ee = new Tile[] {e1, e2};
+		
+		Routing routing = Routing.Routing(grid);
+		
+		Crucible c1 = Crucible.Crucible(1, 3);
+		Crucible c2 = Crucible.Crucible(4, 10);
+		
+		int dist1 = routing.fromTo(ss, ee, c1);
+		System.out.println(dist1);
+		
+		int dist2 = routing.fromTo(ss, ee, c2);
+		System.out.println(dist2);
+	}
+}
