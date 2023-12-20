@@ -182,6 +182,16 @@ Its tiny library has quite archaic and inconvenient API.
 I did not attempt to implemet any sophisticated algorithm, just flooding with a queue.
 But I focused on modeling of the task, which paid off in the second part, where it was trivial to extend.
 
+## Day 18 - Xtend
+
+The language tries to fix some issues of Java, some successfully.
+For example the idea that everything is an expression is nice.
+But its main feature extension function are quite meh.
+
+The idea of colors made me implement a simple array-based map with some flood-filling.
+This turned out to be bad and needed to be reimplemented for the second task.
+Counting how much the trench adds to the area was interesting.
+
 # Lists
 
 ## Language pool
@@ -198,10 +208,8 @@ But I focused on modeling of the task, which paid off in the second part, where 
 - m4
 - MUMPS
 - Oz
-- PL/I
 - TeX
 - TypeScript
-- Xtend
 
 ## Used languages
 
@@ -321,6 +329,7 @@ But I focused on modeling of the task, which paid off in the second part, where 
 - Vala
 - Vim Script
 - XSLT
+- Xtend
 - Yeti
 - Yoix
 - Zig
@@ -418,3 +427,4 @@ But I focused on modeling of the task, which paid off in the second part, where 
 - Tea - archived; cannot be downloaded
 - ATS - cannot install, fails to build
 - Constraint Handling Rules - not standalone
+- PL/I - did manage to compile example but not to run it
