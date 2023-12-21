@@ -192,6 +192,15 @@ The idea of colors made me implement a simple array-based map with some flood-fi
 This turned out to be bad and needed to be reimplemented for the second task.
 Counting how much the trench adds to the area was interesting.
 
+## Day 19 - F#
+
+Like a lot of other functional languages, once it compiles, it usually gives the correct answer.
+F# is really nice, only lacking on some bits of documentation where it refers to C#.
+I wonder if there is syntax for record field accessor function.
+
+I liked the task; it was worth saving a nice functional language for it.
+The representation of the domain was easy in F# and none of the algorithms were hard either.
+
 # Lists
 
 ## Language pool
@@ -199,7 +208,6 @@ Counting how much the trench adds to the area was interesting.
 - C#
 - CLIPS
 - Csh
-- F#
 - F*
 - Inform 7
 - Joy - does not compile, almost no documentation
@@ -243,6 +251,7 @@ Counting how much the trench adds to the area was interesting.
 - Elixir
 - (Open)Euphoria
 - Erlang
+- F#
 - Factor
 - Fantom
 - FGHC
