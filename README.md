@@ -201,21 +201,30 @@ I wonder if there is syntax for record field accessor function.
 I liked the task; it was worth saving a nice functional language for it.
 The representation of the domain was easy in F# and none of the algorithms were hard either.
 
+## Day 20 - CLIPS
+
+I came accross this language last year but it was too late.
+I bough the physical book and studied it extensively.
+It feels like one step further than Prolog - you communicate between predicates via facts.
+The language is pretty decent, just the string library could be richer.
+
+The simulation was fun, debugging signals was easy with the rule-based program.
+It was also easy to add intercepting rules for the second part where again the least common multiple needed to be found.
+
+
 # Lists
 
 ## Language pool
 
 - C#
-- CLIPS
 - Csh
+- Dafny
 - F*
 - Inform 7
 - Joy - does not compile, almost no documentation
-- LFE
-- LogTalk
+- Lean
 - m4
 - MUMPS
-- Oz
 - TeX
 - TypeScript
 
@@ -236,6 +245,7 @@ The representation of the domain was easy in F# and none of the algorithms were 
 - C++
 - Ceylon
 - Chapel
+- CLIPS
 - Closure
 - Cobol
 - Cobra
@@ -356,7 +366,6 @@ The representation of the domain was easy in F# and none of the algorithms were 
 - Goby - Does not have documentation (404)
 - Smalltalk - Could start GUI but could not do anything; poor documentation maybe
 - Scratch, Snap! - Cannot be run from a command line
-- Oz, Mozart - incompatible with Boost 1.7
 - FoxPro - not for Linux
 - ActionScript - Cannot be downloaded
 - Pure - requires different version of LLVM which fails to compile
@@ -437,3 +446,6 @@ The representation of the domain was easy in F# and none of the algorithms were 
 - ATS - cannot install, fails to build
 - Constraint Handling Rules - not standalone
 - PL/I - did manage to compile example but not to run it
+- LFE - not even the hello world works
+- LogTalk - could not figure out input and parsing strings
+- Oz, Mozart - cannot figure how to use I/O
