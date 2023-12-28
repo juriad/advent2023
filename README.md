@@ -211,6 +211,15 @@ The language is pretty decent, just the string library could be richer.
 The simulation was fun, debugging signals was easy with the rule-based program.
 It was also easy to add intercepting rules for the second part where again the least common multiple needed to be found.
 
+## Day 21 - LEAN
+
+I came accross this language when looking at F\*.
+It quite nicely extends pretty ordinary functional language with proofs.
+I struggled with working with Fin arithmetics, so I just used Nat.
+
+I implemented the first part with Arrays but Lists proved to be faster.
+The second part utlized the fact that we are searching in a square.
+We just need to compute how many of those squares of each particular type are fully enclosed.
 
 # Lists
 
@@ -218,11 +227,8 @@ It was also easy to add intercepting rules for the second part where again the l
 
 - C#
 - Csh
-- Dafny
-- F*
 - Inform 7
 - Joy - does not compile, almost no documentation
-- Lean
 - m4
 - MUMPS
 - TeX
@@ -292,6 +298,7 @@ It was also easy to add intercepting rules for the second part where again the l
 - K(ona)
 - Kotlin
 - LDPL
+- Lean
 - (Common)Lisp
 - (UCB)Logo
 - Lua
@@ -449,3 +456,6 @@ It was also easy to add intercepting rules for the second part where again the l
 - LFE - not even the hello world works
 - LogTalk - could not figure out input and parsing strings
 - Oz, Mozart - cannot figure how to use I/O
+- F* - no description of library and I/O
+- Coq - cannot figure I/O
+- Dafny - does not have I/O library yet
