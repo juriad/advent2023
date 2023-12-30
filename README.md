@@ -221,11 +221,19 @@ I implemented the first part with Arrays but Lists proved to be faster.
 The second part utlized the fact that we are searching in a square.
 We just need to compute how many of those squares of each particular type are fully enclosed.
 
+## Day 22 - C#
+
+After waisting at least a day trying two languages, I settled for something easy.
+C# is quite pleasant but compared to Java (especially after 17) it has little to offer.
+Its naming convention and code style will forever feel foreign.
+
+Representation was half of success in this task.
+A simple recursive algorithm worked and no sophisticated graph traversal was needed.
+
 # Lists
 
 ## Language pool
 
-- C#
 - Csh
 - Inform 7
 - Joy - does not compile, almost no documentation
@@ -249,6 +257,7 @@ We just need to compute how many of those squares of each particular type are fu
 - BQN
 - C
 - C++
+- C#
 - Ceylon
 - Chapel
 - CLIPS
@@ -377,7 +386,6 @@ We just need to compute how many of those squares of each particular type are fu
 - ActionScript - Cannot be downloaded
 - Pure - requires different version of LLVM which fails to compile
 - Eta - too close to Haskell on JVM
-- Whiley - could not make the example to work; it does not produce a class file
 - Kit - discontinued, crucial parts of documentations are missing
 - Snowball - not really a programming language
 - Unicon - cannot compile
@@ -459,3 +467,5 @@ We just need to compute how many of those squares of each particular type are fu
 - F* - no description of library and I/O
 - Coq - cannot figure I/O
 - Dafny - does not have I/O library yet
+- Pict - cannot compile, prebuild has old dependencies on libc
+- Whiley - has no way to process input yet
