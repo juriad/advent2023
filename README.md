@@ -230,6 +230,16 @@ Its naming convention and code style will forever feel foreign.
 Representation was half of success in this task.
 A simple recursive algorithm worked and no sophisticated graph traversal was needed.
 
+## Day 23 - TypeScript
+
+I hope that the last two days wil be easy; I don't have ny convenient language left.
+TypeScript really elevates JavaScript to a usable language.
+There are a few hickups (such as typing object decomposition) and weird enums, but overall good.
+
+I simply implemented a stack-based walkk-through.
+Instead of returning and picking up crumbs, I instead remembered which sections belong to the valid path.
+The second part ran slowly but it finished while I was taking a break to eat.
+
 # Lists
 
 ## Language pool
@@ -240,7 +250,6 @@ A simple recursive algorithm worked and no sophisticated graph traversal was nee
 - m4
 - MUMPS
 - TeX
-- TypeScript
 
 ## Used languages
 
@@ -358,6 +367,7 @@ A simple recursive algorithm worked and no sophisticated graph traversal was nee
 - Swift
 - Swift (parallel scripting language)
 - TCL
+- TypeScript
 - Turing Plus
 - TXL
 - Unison
