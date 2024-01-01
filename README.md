@@ -240,13 +240,27 @@ I simply implemented a stack-based walkk-through.
 Instead of returning and picking up crumbs, I instead remembered which sections belong to the valid path.
 The second part ran slowly but it finished while I was taking a break to eat.
 
+## Day 24 - VB.Net
+
+Visual Basic is just a verbose cousin of C#; there is little reason to use it because of that.
+On the other hand it automatically provides very rich library to those who migrate from some Basics.
+
+Nice repetition of linear algebra from school.
+The first part was just easy manipulation with lines.
+I was worried that some lines could be parallel with the exes, so my solution is a bit more precise.
+I also did need to divide anywhere and since the velocities were small, it worked fine.
+The second part was a beast.
+At first sight it looked like a system of non-linear equations but a clever substitution makes it linear.
+The extra variable is compensated by having more input data that needed.
+I had to implement rational numbers and matrix-based solution of system of linear equations.
+At least the system was fairly small, just 5 variables.
+
 # Lists
 
 ## Language pool
 
 - Csh
 - Inform 7
-- Joy - does not compile, almost no documentation
 - m4
 - MUMPS
 - TeX
@@ -372,6 +386,7 @@ The second part ran slowly but it finished while I was taking a break to eat.
 - TXL
 - Unison
 - Vala
+- VB.Net
 - Vim Script
 - XSLT
 - Xtend
@@ -394,7 +409,6 @@ The second part ran slowly but it finished while I was taking a break to eat.
 - Scratch, Snap! - Cannot be run from a command line
 - FoxPro - not for Linux
 - ActionScript - Cannot be downloaded
-- Pure - requires different version of LLVM which fails to compile
 - Eta - too close to Haskell on JVM
 - Kit - discontinued, crucial parts of documentations are missing
 - Snowball - not really a programming language
@@ -479,3 +493,6 @@ The second part ran slowly but it finished while I was taking a break to eat.
 - Dafny - does not have I/O library yet
 - Pict - cannot compile, prebuild has old dependencies on libc
 - Whiley - has no way to process input yet
+- Pure - requires different version of LLVM which fails to compile
+- Joy - does not compile, almost no documentation
+- Misty - no I/O yet
