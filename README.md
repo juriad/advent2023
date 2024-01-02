@@ -255,6 +255,17 @@ The extra variable is compensated by having more input data that needed.
 I had to implement rational numbers and matrix-based solution of system of linear equations.
 At least the system was fairly small, just 5 variables.
 
+## Day 25 - Nelua
+
+I found many new languages in AUR again.
+Nelua seemed reasonable, so I chose it; good documentation, large standard library.
+I had a few issues with pointers, recursive structures and initialization of containers.
+
+The task asked for finding minimm cut in a graph.
+Normally I'd use some max flow algorithm, but there is Karger's algorithm that finds it directly.
+The only issues is that it is probabilistic, so it can find a bigger cut instead.
+Luckily we know what is the size of the cut, so we simply iterate a few times until we get what we want.
+
 # Lists
 
 ## Language pool
@@ -341,6 +352,7 @@ At least the system was fairly small, just 5 variables.
 - MoonScript
 - NASM
 - Neko
+- Nelua
 - Nial
 - Nim
 - Objective-C

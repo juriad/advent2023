@@ -1,0 +1,122 @@
+require 'arg'
+require 'math'
+require 'vector'
+require 'hashmap'
+require 'filestream'
+require 'allocators.default'
+
+local Edge = @record{
+  from: pointer,
+  to: pointer
+}
+
+local Node = @record{
+  name: string,
+  size: integer,
+  edges: sequence(*Edge)
+}
+
+local Graph = @record{
+  nodes: sequence(*Node),
+  edges: sequence(*Edge)
+}
+
+function Graph:contractRandom()
+  local e = self.edges[math.random(1, #self.edges)]
+  local n1 = (@*Node)(e.from)
+  local n2 = (@*Node)(e.to)
+  if #n1.edges < #n2.edges then
+    local tmp = n1
+    n1 = n2
+    n2 = tmp
+  end
+  -- print("contracting")
+  -- print(n1.name, n2.name)
+  -- print(#self.edges, #self.nodes)
+  
+  for i = 1, #n2.edges do
+    local n2e = n2.edges[i]
+    if n2e.from == n2 then
+      if n2e.to ~= n1 then
+        n2e.from = n1
+        n1.edges:push(n2e)
+      else
+        n2e.from = nilptr
+        -- print("between from")
+      end
+    end
+    if n2e.to == n2 then
+      if n2e.from ~= n1 then
+        n2e.to = n1
+        n1.edges:push(n2e)
+      else
+        n2e.from = nilptr
+        -- print("between to")
+      end
+    end
+  end
+  
+  n1.size = n1.size + n2.size
+  self.nodes:removevalue(n2)
+  self.edges:removeif(function(e: *Edge): boolean
+    return e.from == nilptr
+  end)
+  -- print(#self.edges, #self.nodes)
+  -- print()
+end
+
+local function loadGraph(fileName: string): Graph
+  local ns: sequence(*Node)
+  local es: sequence(*Edge)
+  local names: hashmap(string, *Node)
+  
+  local f = filestream.open(fileName, "r")  
+  for line in f:lines("l") do
+    local fname = string.sub(line, 1, 3)
+    local has, f = names:has_and_get(fname)
+    if not has then
+      f = default_allocator:new(@Node)
+      f.name = fname
+      f.size = 1
+      names[fname] = f
+      ns:push(f)
+    else
+      -- print("has1", fname)
+    end
+    
+    for i = 6, #line, 4 do
+      local tname = string.sub(line, i, i + 2)
+      local has, t = names:has_and_get(tname)
+      if not has then
+        t = default_allocator:new(@Node)
+        t.name = tname
+        t.size = 1
+        names[tname] = t
+        ns:push(t)
+      else
+        -- print("has2", tname)
+      end
+      
+      local e = default_allocator:new(@Edge)
+      e.from = f
+      f.edges:push(e)
+      e.to = t
+      t.edges:push(e)
+      es:push(e)
+    end
+  end
+  
+  return (@Graph){ns, es}
+end
+
+math.randomseed()
+local graph
+repeat
+  graph = loadGraph(arg[1])
+  while #graph.nodes > 2 do
+    graph:contractRandom()
+  end
+  -- print(#graph.edges)
+until #graph.edges == 3
+
+print(graph.nodes[1].size * graph.nodes[2].size)
